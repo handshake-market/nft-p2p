@@ -1,0 +1,242 @@
+{
+    "buildInfo": {
+        "rustc": {
+            "version": "1.64.0-nightly",
+            "commitHash": "fe3342816a282949f014caa05ea2e669ff9d3d3c",
+            "commitDate": "2022-08-01",
+            "channel": "Nightly",
+            "short": "rustc 1.64.0-nightly (fe3342816 2022-08-01)"
+        },
+        "contractCrate": {
+            "name": "handshake",
+            "version": "0.0.0",
+            "git_version": "b0626e4"
+        },
+        "framework": {
+            "name": "elrond-wasm",
+            "version": "0.34.1"
+        }
+    },
+    "name": "HandShake",
+    "constructor": {
+        "inputs": [],
+        "outputs": []
+    },
+    "endpoints": [
+        {
+            "name": "setVault",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "vault",
+                    "type": "Address"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "setFee",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "fee",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "pause",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "unpause",
+            "onlyOwner": true,
+            "mutability": "mutable",
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "createOffer",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "wanted_token_id",
+                    "type": "EgldOrEsdtTokenIdentifier"
+                },
+                {
+                    "name": "wanted_token_nonce",
+                    "type": "u64"
+                },
+                {
+                    "name": "wanted_token_amount",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "cancelOffer",
+            "mutability": "mutable",
+            "inputs": [
+                {
+                    "name": "index",
+                    "type": "u64"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "acceptOffer",
+            "mutability": "mutable",
+            "payableInTokens": [
+                "*"
+            ],
+            "inputs": [
+                {
+                    "name": "index",
+                    "type": "u64"
+                },
+                {
+                    "name": "royalties",
+                    "type": "BigUint"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "name": "viewOffers",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "List<OfferOut>"
+                }
+            ]
+        },
+        {
+            "name": "viewOffer",
+            "mutability": "readonly",
+            "inputs": [
+                {
+                    "name": "index",
+                    "type": "u64"
+                }
+            ],
+            "outputs": [
+                {
+                    "type": "Option<OfferOut>"
+                }
+            ]
+        },
+        {
+            "name": "viewEmptyOfferIndexes",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "variadic<u64>",
+                    "multi_result": true
+                }
+            ]
+        },
+        {
+            "name": "viewHighestOfferIndex",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "viewVault",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "Address"
+                }
+            ]
+        },
+        {
+            "name": "viewFee",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "BigUint"
+                }
+            ]
+        },
+        {
+            "name": "viewIsPaused",
+            "mutability": "readonly",
+            "inputs": [],
+            "outputs": [
+                {
+                    "type": "bool"
+                }
+            ]
+        }
+    ],
+    "events": [],
+    "hasCallback": false,
+    "types": {
+        "EsdtTokenPayment": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "token_identifier",
+                    "type": "TokenIdentifier"
+                },
+                {
+                    "name": "token_nonce",
+                    "type": "u64"
+                },
+                {
+                    "name": "amount",
+                    "type": "BigUint"
+                }
+            ]
+        },
+        "OfferOut": {
+            "type": "struct",
+            "fields": [
+                {
+                    "name": "index",
+                    "type": "u64"
+                },
+                {
+                    "name": "owner",
+                    "type": "Address"
+                },
+                {
+                    "name": "offered_token",
+                    "type": "EsdtTokenPayment"
+                },
+                {
+                    "name": "wanted_token_identifier",
+                    "type": "EgldOrEsdtTokenIdentifier"
+                },
+                {
+                    "name": "wanted_token_nonce",
+                    "type": "u64"
+                },
+                {
+                    "name": "wanted_token_amount",
+                    "type": "BigUint"
+                }
+            ]
+        }
+    }
+}
